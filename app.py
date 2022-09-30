@@ -25,8 +25,7 @@ def jsonify_cupcake(cupcake):
 def list_cupcakes():
     """List all cupcakes"""
     cupcakes = Cupcake.query.all()
-    serialized = [jsonify_cupcake(c) for c in cupcakes]
-    return jsonify(cupcakes=serialized)
+    return render_template("home.html", cupcakes=cupcakes)
 
 
 @app.route("/api/cupcakes", methods=["POST"])
