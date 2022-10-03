@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cupcakes</title>
+</head>
+
+<body>
+    <h1>Cupcakes!</h1>
+    <ul id="cupcakes">
+        {%for cake in cupcakes%}
+        <ul>
+            <a href="/api/cupcakes/{{cake.id}}"><img src="{{cake.image}}" alt="{{cake.flavor}}" height="200px"></a><br>
+            A {{cake.size}}, {{cake.flavor}} cupcake.<br>
+            Rating: {{cake.rating}}
+        </ul>
+        {%endfor%}
+    </ul>
+    <form >
+        <label for="flavor">Flavor:</label><br>
+        <input type="text" class="info" name="flavor" id="flavor"><br>
+        <label for="size">Size:</label><br>
+        <input type="text" class="info" name="size" id="size"><br>
+        <label for="rating">Rating:</label><br>
+        <input type="number" class="info" name="rating" id="rating"><br>
+        <label for="image">Image URL:</label><br>
+        <input type="text" class="info" name="image" id="image"><br><br>
+    </form>
+    <button class="add-cupcake">Add Cupcake</button>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="\static\cupcake.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</body>
+
+</html>

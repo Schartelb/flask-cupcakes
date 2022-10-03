@@ -52,12 +52,14 @@ def single_cupcake(id):
 def single_cupcake_update(id):
     """Update single cupcake"""
     cupcake = Cupcake.query.get_or_404(id)
-    cupcake.flavor = request.json.get["flavor"],
-    cupcake.size = request.json.get["size"],
-    cupcake.rating = request.json.get["rating"],
-    cupcake.image = request.json.get["image"]
-    db.session.commit()
-    return jsonify(cupcake=jsonify_cupcake(cupcake))
+    if cupcake:
+        cupcake.flavor = request.json.get("flavor"),
+        cupcake.size = request.json.get("size"),
+        cupcake.rating = request.json.get("rating"),
+        cupcake.image = request.json.get("image")
+        db.session.commit()
+        return jsonify(cupcake=jsonify_cupcake(cupcake))
+    return redirect(f"/api/cupcakes/{id}")  # add error path/catch
 
 
 @app.route("/api/cupcakes/<int:id>", methods=["DELETE"])

@@ -110,17 +110,23 @@ class CupcakeViewsTestCase(TestCase):
 
     def test_update_cupcake(self):
         with app.test_client() as client:
-            resp = client.patch(
-                f"/api/cupcakes/1", json={
-                    "flavor": "Mud",
-                })
+            cupcake = Cupcake.query.first()
+            url = f"/api/cupcakes/{cupcake.id}"
+            resp = client.patch(url,
+                                json={"flavor": "Mud",
+                                      "size": "bite",
+                                      "rating": "1.5",
+                                      "image": "image"
+                                      })
 
-            self.assertEqual(resp.json['flavor'], "Mud")
+            self.assertEqual(resp.json['cupcake']['flavor'], "Mud")
 
     def test_delete_cupcake(self):
         with app.test_client() as client:
+            cupcake = Cupcake.query.first()
+            url = f"/api/cupcakes/{cupcake.id}"
             resp = client.delete(
-                f"/api/cupcakes/{self.id}"
+                url
             )
 
-            self.AssertEqual(resp.json['msg'], "Cupcake Deleted")
+            assert resp.json['msg'] == "Cupcake Deleted"
